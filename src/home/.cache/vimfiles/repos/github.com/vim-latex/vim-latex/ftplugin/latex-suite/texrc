@@ -91,9 +91,7 @@ endif
 
 " A comma seperated list of formats which need multiple compilations to be
 " correctly compiled.
-" TexLet g:Tex_MultipleCompileFormats = 'dvi'
 TexLet g:Tex_MultipleCompileFormats = 'pdf,bib,pdf,pdf'
-" TexLet g:Tex_MultipleCompileFormats = 'xepdf,bib,xepdf,xepdf'
 
 " Uncomment this line if you compile ps files via dvi files.
 " TexLet g:Tex_FormatDependency_ps = 'dvi,ps'
@@ -118,7 +116,7 @@ TexLet g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
 TexLet g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
 
 " Support for UTF-8
-TexLet g:Tex_CompileRule_xepdf = 'xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+TexLet g:Tex_CompileRule_cnpdf = 'xelatex --src-specials -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
 
 " TexLet g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
 " TexLet g:Tex_CompileRule_pdf = 'dvipdfm $*.dvi'
@@ -204,7 +202,7 @@ endif
 " Doing something like this would not be possible using Tex_ViewRule_html
 let theuniqueserv = expand("%:r")
 TexLet g:Tex_ViewRuleComplete_dvi = ''
-TexLet g:Tex_ViewRuleComplete_pdf = 'zathura -x "vim --servername '.g:theuniqueserv.' --remote +\%{line} \%{input}" $*.pdf 2>/dev/null &'
+TexLet g:Tex_ViewRuleComplete_pdf = 'zathura -x "/opt/vim/bin/vim --servername '.g:theuniqueserv.' --remote +\%{line} \%{input}" $*.pdf 2>/dev/null &'
 
 " }}}
 " ------------------------------------------------------------------------------ 
