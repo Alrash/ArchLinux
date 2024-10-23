@@ -1,0 +1,7 @@
+> mysql -u root -p
+CREATE USER 'monty'@'localhost' IDENTIFIED BY 'some_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'monty'@'localhost';
+quit
+
+> mysql -u ? -p
+source blog.sql

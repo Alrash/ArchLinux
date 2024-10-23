@@ -2,10 +2,13 @@
 
 FRP_PATH='/etc/frp'
 NGINX_FILE='/etc/nginx/nginx.conf'
-APACHE_FILE='/etc/httpd/conf/httpd.conf:/etc/httpd/conf.d/webdav.conf:/etc/httpd/.htpasswd'
+APACHE_FILE='/etc/apache2/ports.conf:/etc/apache2/conf-enabled/webdav.conf:/etc/apache2/.htpasswd'
 WEBDAV_PATH='/var/www/html'
-WEBDAV_USER='apache'
+WEBDAV_USER='www-data'
 SERVICE_FILE='/etc/systemd/system/letsencrypt.service:/etc/systemd/system/letsencrypt.timer:/usr/lib/systemd/system/frps.service:/usr/lib/systemd/system/frps@.service'
+MYSQL_USER='mysql_user'
+MYSQL_PASSWD='mysql_passwd'
+MYSQL_DATABASES='wp_blog'
 
 copy_file(){
     root=`dirname $1`
@@ -25,6 +28,9 @@ copy_file_list(){
 PACK_ROOT='pack_transfer'
 mkdir $PACK_ROOT
 cd $PACK_ROOT
+
+# 导出数据库
+mysqldump -u$MYSQL_USER -p$MYSQL_PASSWD --databases $MYSQL_DATABASES > blog.sql
 
 # 拷贝frp
 copy_file $FRP_PATH
